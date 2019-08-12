@@ -8,11 +8,12 @@ class Constants{
   static Color darkPrimary = Color(0xFF0a0f12);
   static Color lightAccent = Colors.orange;
   static Color lightBG = Color(0xfffcfcff);
-  static Color darkBG = Color(0xFF0a0f12);
   static Color blueAccent = Color(0xFF3e2bcb);
 
   static Color darkAccent = Color(0xFF03dac6);
   static Color darkAccentVariant = Color(0xFF018786);
+  static Color darkBG = Color(0xFF0a0f12);
+
 
 
 

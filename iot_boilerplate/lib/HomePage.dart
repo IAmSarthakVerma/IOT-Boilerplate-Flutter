@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:iot_boilerplate/tabs/TabOne.dart';
-
-
+import 'package:iot_boilerplate/tabs/TabTwo.dart';
+import 'package:iot_boilerplate/tabs/TabThree.dart';
+import 'package:flutter/services.dart';
+import 'package:iot_boilerplate/util/const.dart';
 
 class HomePage extends StatefulWidget {
   static String tag = 'home-page';
@@ -11,20 +13,23 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => new _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> with TickerProviderStateMixin{
+  List tabsList = [TabOne(), TabTwo(), TabThree()];
 
-  PageController _pageController;
+  TabController _pageController;
   int _page = 0;
 
   @override
   void initState() {
     super.initState();
-  }
 
-  void onPageChanged(int page) {
-    setState(() {
-      this._page = page;
-    });
+    _pageController = new TabController(length: 3, vsync: this);
+
+
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
   }
 
   @override
@@ -33,64 +38,70 @@ class _HomePageState extends State<HomePage> {
     _pageController.dispose();
   }
 
-  void navigationTapped(int page) {
-    _pageController.jumpToPage(page);
-  }
-
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
     return SafeArea(
-      child: Scaffold(
-          body: PageView(
-            physics: NeverScrollableScrollPhysics(),
-            controller: _pageController,
-            onPageChanged: onPageChanged,
-            children: List.generate(4, (index) => TabOne()),
-          ),
-          bottomNavigationBar: Theme(
-            data: Theme.of(context).copyWith(
-              // sets the background color of the `BottomNavigationBar`
-              canvasColor: Theme.of(context).primaryColor,
-              // sets the active color of the `BottomNavigationBar` if `Brightness` is light
-              primaryColor: Theme.of(context).accentColor,
-              textTheme: Theme
-                  .of(context)
-                  .textTheme
-                  .copyWith(caption: TextStyle(color: Colors.grey[500]),
-              ),
+      child: WillPopScope(
+          child: Scaffold(
+
+            bottomNavigationBar: new Material(
+              color: Constants.darkBG,
+              child: new TabBar(
+                  controller: _pageController,
+                  indicatorColor: Constants.darkAccent,
+                  labelColor: Constants.darkAccent,
+                  unselectedLabelColor: Colors.grey,
+                  tabs: <Widget>[
+                    new Tab(
+                      icon: Icon(Feather.getIconData("home")),
+                    ),
+                    new Tab(
+                      icon: Icon(Feather.getIconData("edit")),
+                    ),
+                    new Tab(
+                      icon: Icon(Feather.getIconData("settings")),
+                    ),
+                  ]),
             ),
-            child: BottomNavigationBar(
-              type: BottomNavigationBarType.fixed,
-              items: <BottomNavigationBarItem>[
-                BottomNavigationBarItem(
-                  icon: Icon(
-                    Feather.getIconData("home"),
-                  ),
-                  title: Container(height: 0.0),
-                ),
 
-                BottomNavigationBarItem(
-                  icon: Icon(
-                    Feather.getIconData("edit"),
-                  ),
-                  title: Container(height: 0.0),
-                ),
-
-                BottomNavigationBarItem(
-                  icon: Icon(
-                    Feather.getIconData("settings"),
-                  ),
-                  title: Container(height: 0.0),
-                ),
+            body: new TabBarView(
+              children: <Widget>[
+                TabOne(),
+                TabTwo(),
+                TabThree(),
               ],
-              onTap: navigationTapped,
-              currentIndex: _page,
+              controller: _pageController,
             ),
-          )
-      ),
+          ),
+          onWillPop: _onWillPop),
     );
+//      ),
+//    );
+  }
+
+  Future<bool> _onWillPop() {
+    return showDialog(
+          context: context,
+          builder: (context) => new AlertDialog(
+            title: new Text('Are you sure?'),
+            content: new Text('Do you want to close the app'),
+            actions: <Widget>[
+              new FlatButton(
+                onPressed: () => Navigator.of(context).pop(false),
+                child: new Text('No'),
+              ),
+              new FlatButton(
+                onPressed: () {
+                  Navigator.of(context).pop(true);
+                },
+                child: new Text('Yes'),
+              ),
+            ],
+          ),
+        ) ??
+        false;
   }
 }

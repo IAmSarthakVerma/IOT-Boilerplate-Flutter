@@ -13,7 +13,7 @@ class TabOne extends StatefulWidget {
 class _TabOneState extends State<TabOne> {
   final TextEditingController _searchControl = new TextEditingController();
 
-  List furnitures = [
+  List rooms = [
     {
       "name": "Living Room",
       "img": "assets/1.jpeg",
@@ -112,9 +112,9 @@ class _TabOneState extends State<TabOne> {
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               shrinkWrap: true,
-              itemCount: furnitures.length,
+              itemCount: rooms.length,
               itemBuilder: (BuildContext context, int index) {
-                Map furniture = furnitures[index];
+                Map furniture = rooms[index];
 
                 return Padding(
                   padding: EdgeInsets.only(right: 20),
@@ -198,9 +198,9 @@ class _TabOneState extends State<TabOne> {
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               shrinkWrap: true,
-              itemCount: furnitures.length,
+              itemCount: rooms.length,
               itemBuilder: (BuildContext context, int index) {
-                Map furniture = furnitures[index];
+                Map furniture = rooms[index];
 
                 return Padding(
                   padding: EdgeInsets.only(right: 20),
