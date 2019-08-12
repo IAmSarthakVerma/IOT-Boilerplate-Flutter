@@ -74,21 +74,14 @@ class _HomePageState extends State<HomePage> {
 
                 BottomNavigationBarItem(
                   icon: Icon(
-                    Feather.getIconData("heart"),
+                    Feather.getIconData("edit"),
                   ),
                   title: Container(height: 0.0),
                 ),
 
                 BottomNavigationBarItem(
                   icon: Icon(
-                    Feather.getIconData("user"),
-                  ),
-                  title: Container(height: 0.0),
-                ),
-
-                BottomNavigationBarItem(
-                  icon: Icon(
-                    Feather.getIconData("grid"),
+                    Feather.getIconData("settings"),
                   ),
                   title: Container(height: 0.0),
                 ),

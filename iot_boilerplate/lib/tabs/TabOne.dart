@@ -38,7 +38,7 @@ class _TabOneState extends State<TabOne> {
         actions: <Widget>[
           Center(
             child: IconBadge(
-              icon: Feather.getIconData("shopping-cart"),
+              icon: Feather.getIconData("refresh-ccw"),
             ),
           ),
           SizedBox(width: 20),
@@ -133,7 +133,6 @@ class _TabOneState extends State<TabOne> {
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 20,
-
                             ),
                           ),
                           SizedBox(height: 10),
