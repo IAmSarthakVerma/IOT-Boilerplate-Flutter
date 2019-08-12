@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iot_boilerplate/HomePage.dart';
+import 'package:iot_boilerplate/util/const.dart';
 
 void main() => runApp(MyApp());
 
@@ -14,15 +15,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      title: 'Smart Switch',
+      title: Constants.appName,
       debugShowCheckedModeBanner: false,
-      theme: new ThemeData(
-        primaryColor: Colors.blue,
-        primaryColorDark: Colors.blueAccent,
-        primaryColorLight: Colors.blue,
-        accentColor: Colors.white,
-        canvasColor: Color(0xFFf9f9f9),
-      ),
+      theme: Constants.darkTheme,
       color: Colors.white,
       home: HomePage(),
       routes: routes,
