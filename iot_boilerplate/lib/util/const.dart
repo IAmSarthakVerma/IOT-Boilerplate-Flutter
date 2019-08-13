@@ -37,6 +37,7 @@ class Constants{
 
   static ThemeData darkTheme = ThemeData(
     brightness: Brightness.dark,
+    canvasColor: darkBG,
     backgroundColor: darkBG,
     primaryColor: darkPrimary,
     accentColor: darkAccent,
@@ -46,7 +47,7 @@ class Constants{
       elevation: 0,
       textTheme: TextTheme(
         title: TextStyle(
-          color: lightBG,
+          color: Colors.white,
           fontSize: 18.0,
           fontWeight: FontWeight.w800,
         ),
